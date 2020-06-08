@@ -1,0 +1,64 @@
+// Place all the styles related to the Home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+html {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  font: 16px/22px Tahoma;
+}
+
+body {
+  color: #333;
+  background-color: #fff;
+  padding: 2rem;
+}
+
+a {
+  color: #000;
+  cursor: pointer;
+  &:hover,
+  &:focus {
+    color: #999;
+  }
+}
+
+a:focus {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+
+h3 {
+  color: #666;
+}
+
+hr {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 0;
+  border-top: 1px solid #ccc;
+}
+
+table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 20px;
+  background-color: transparent;
+  font: 14px/18px Tahoma;
+  td, th {
+    vertical-align: top;
+    padding: 10px 11px 12px;
+  }
+  thead td,
+  th {
+    color: #96b0ac;
+    font-weight: bold;
+    border-bottom: 1px solid #e1e1e1;
+    padding: 4px 12px;
+  }
+  tbody tr {
+    &:nth-child(odd) {
+      background: #f6f6f6;
+    }
+  }
+}
+

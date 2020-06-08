@@ -1,0 +1,75 @@
+<h3> Список всех показателей</h3>
+</br>
+</br>
+<table>
+  <thead>
+    <tr>
+      <th>Игрок</th>
+      <th>Команда</th>
+      <th>Показатель</th>
+      <th>Матч</th>
+    </tr>
+  </thead>
+  <tbody>
+  <%@results.each do |result| %>
+    <tr>
+      <td> <%= "#{result.player.first_name unless result.player.first_name.blank?} #{result.player.second_name}" %> </td>
+      <td> <%= Team.find(result.player.team_id).name %> </td>
+      <td> <%= result.intro %> </td>
+      <td> <%= result.match.name %> </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<br/>
+<hr/>
+<br/>
+<h3>Добавить показатель</h3>
+<%= form_for("add_result", method: :post, url: add_player_ajax_path, enforce_utf8: false) do |f| %>
+  <%= f.label :player_id, "Выберите игрока:" %>
+  <%= f.select :player_id, Player.all.map {|player| [player.second_name, player.id] }, { include_blank:"..." } %>
+  <br>
+  <%= f.label :match_id, "Выберите матч:" %>
+  <%= f.select :match_id, Match.all.map {|match| [match.name, match.id] }, { include_blank:"..." }  %>
+  <br>
+  <%= f.label :result, "Заполните показатель:" %>
+  <%= f.text_field :result, placeholder:"..." %>
+  <br>
+  <%= f.submit 'Добавить' %>
+  <%= f.button 'Отмена', type: :reset %>
+<% end %>
+<br/>
+<hr/>
+<br/>
+<br/>
+<br/>
+
+<h3>Проверить выполнил ли игрок показатель</h3>
+<%= form_for("check_result", method: :post, url: check_result_ajax_path, enforce_utf8: false, remote: true) do |f| %>
+    <%= f.label :player_id, "Выберите игрока:" %>
+    <%= f.select :player_id, Player.all.map {|player| [player.second_name, player.id] }, { include_blank:"..." } %>
+    <br>
+    <%= f.label :result_intro, "Выберите показатель:" %>
+    <%= f.select :result_intro, Result.select(:intro).distinct.map  {|result| result.intro  }, { include_blank:"..." }  %>
+    <br>
+    <%= f.submit 'Проверить' %>
+    <%= f.button 'Отмена', type: :reset %>
+<% end %>
+<div>выполнил: </div>
+<br/>
+<hr/>
+<br/>
+<br/>
+<br/>
+
+<h3>Top-5 игроков по конкретному показателю</h3>
+<%= form_for("top_five", method: :post, url: top_five_ajax_path, enforce_utf8: false) do |f| %>
+    <%= f.label :result_intro, "Выберите показатель:" %>
+    <%= f.select :result_intro, Result.select(:intro).distinct.map  {|result| result.intro  }, { include_blank:"..." }  %>
+    <br>
+    <%= f.label :team_id, "Выберите команду:" %>
+    <%= f.select :team_id, Team.all.map {|team| [team.name, team.id] }, { include_blank:"..." } %>
+    <br>
+    <%= f.submit 'Показать' %>
+    <%= f.button 'Отмена', type: :reset %>
+<% end %>
