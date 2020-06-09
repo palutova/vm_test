@@ -1,7 +1,7 @@
 module ApplicationHelper
   def add_result(match_id, player_id, text)
-    @player = Player.find(player_id)
-    @match = Match.find(match_id)
+    @player = Player.find(player_id) unless player_id.blank?
+    @match = Match.find(match_id) unless player_id.blank?
     if @player.present? and @match.present?
       @result = Result.create!(match_id:match_id, player_id:player_id, intro: text)
       if @result.present?
