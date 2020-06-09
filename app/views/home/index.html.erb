@@ -45,7 +45,7 @@
 <br/>
 
 <h3>Проверить выполнил ли игрок показатель</h3>
-<%= form_for("check_result", method: :post, url: check_result_ajax_path, enforce_utf8: false, remote: true) do |f| %>
+<%= form_for("check_result", method: :post, url: check_result_ajax_path, enforce_utf8: false) do |f| %>
     <%= f.label :player_id, "Выберите игрока:" %>
     <%= f.select :player_id, Player.all.map {|player| [player.second_name, player.id] }, { include_blank:"..." } %>
     <br>
